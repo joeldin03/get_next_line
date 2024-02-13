@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line_utils.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joelozan <joelozan@student.42.fr>          +#+  +:+       +#+        */
+/*   By: joel <joel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 21:38:56 by joelozan          #+#    #+#             */
-/*   Updated: 2024/02/13 21:38:56 by joelozan         ###   ########.fr       */
+/*   Updated: 2024/02/13 22:04:58 by joel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,20 +106,4 @@ char	*ft_strjoin(char const *s1, char const *s2)
 	}
 	strjoin[i + j] = '\0';
 	return (strjoin);
-}
-
-char	*ft_strchr(const char *str, char c)
-{
-	size_t	i;
-
-	i = 0;
-	while (str[i] != '\0')
-	{
-		if (str[i] == c)
-			return ((char *)str + i);
-		i++;
-	}
-	if (str[i] == c)
-		return ((char *)str + i);
-	return (0);
 }
