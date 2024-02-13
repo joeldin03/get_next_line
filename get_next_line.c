@@ -6,7 +6,7 @@
 /*   By: joel <joel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 21:39:04 by joelozan          #+#    #+#             */
-/*   Updated: 2024/02/13 22:05:20 by joel             ###   ########.fr       */
+/*   Updated: 2024/02/13 22:20:12 by joel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,7 @@ static char	*set_line(char *buff)
 	i = 0;
 	while (buff[i] != '\n' && buff[i] != '\0')
 		i++;
-	if (buff[i] == 0)
+	if (buff[i] == 0 || buff[1] == 0)
 		return (NULL);
 	stash = ft_substr(buff, i + 1, ft_strlen(buff) - i);
 	if (!(*stash))
@@ -99,6 +99,6 @@ char	*get_next_line(int fd)
 	buff = NULL;
 	if (!line)
 		return (NULL);
-	stash = set_line(stash);
+	stash = set_line(line);
 	return (line);
 }
