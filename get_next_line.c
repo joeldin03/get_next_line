@@ -6,7 +6,7 @@
 /*   By: joel <joel@student.42.fr>                  +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/13 21:39:04 by joelozan          #+#    #+#             */
-/*   Updated: 2024/02/13 22:27:12 by joel             ###   ########.fr       */
+/*   Updated: 2024/02/14 18:48:20 by joel             ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ static char	*set_line(char *buff)
 	return (stash);
 }
 
-static char	*add_new_line(int fd, char *stash, char *buff)
+static char	*read_line(int fd, char *stash, char *buff)
 {
 	int		b_read;
 	char	*tmp;
@@ -94,7 +94,7 @@ char	*get_next_line(int fd)
 		buff = NULL;
 		return (NULL);
 	}
-	line = add_new_line(fd, stash, buff);
+	line = read_line(fd, stash, buff);
 	free(buff);
 	buff = NULL;
 	if (!line)
