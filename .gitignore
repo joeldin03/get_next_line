@@ -1,1 +1,6 @@
 /.vscode
+/.DS_Store
+/main.c
+/text.txt
+/a.out
+/*.gch
