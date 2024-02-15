@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_next_line.c                                    :+:      :+:    :+:   */
+/*   get_next_line_bonus.c                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joelozan <joelozan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/15 17:21:08 by joelozan          #+#    #+#             */
-/*   Updated: 2024/02/15 21:53:37 by joelozan         ###   ########.fr       */
+/*   Created: 2024/02/15 18:32:17 by joelozan          #+#    #+#             */
+/*   Updated: 2024/02/15 21:53:31 by joelozan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "get_next_line.h"
+#include "get_next_line_bonus.h"
 
 char	*ft_strchr(const char *str, char c)
 {
@@ -79,26 +79,26 @@ static char	*read_line(int fd, char *stash, char *buff)
 
 char	*get_next_line(int fd)
 {
-	static char	*stash;
+	static char	*stash[MAX_FD];
 	char		*line;
 	char		*buff;
 
 	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (!buff)
-		return (NULL);
 	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
 	{
-		free(stash);
+		free(stash[fd]);
 		free(buff);
-		stash = NULL;
+		stash[fd] = NULL;
 		buff = NULL;
 		return (NULL);
 	}
-	line = read_line(fd, stash, buff);
+	if (!buff)
+		return (NULL);
+	line = read_line(fd, stash[fd], buff);
 	free(buff);
 	buff = NULL;
 	if (!line)
 		return (NULL);
-	stash = set_stash(line);
+	stash[fd] = set_stash(line);
 	return (line);
 }
