@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   get_next_line.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: joel <joel@student.42.fr>                  +#+  +:+       +#+        */
+/*   By: joelozan <joelozan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/13 21:39:04 by joelozan          #+#    #+#             */
-/*   Updated: 2024/02/14 19:31:37 by joel             ###   ########.fr       */
+/*   Created: 2024/02/15 17:21:08 by joelozan          #+#    #+#             */
+/*   Updated: 2024/02/15 19:57:28 by joelozan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,24 +28,24 @@ char	*ft_strchr(const char *str, char c)
 	return (0);
 }
 
-static char	*set_line(char *buff)
+static char	*set_stash(char *stash)
 {
-	char	*stash;
+	char	*new_stash;
 	size_t	i;
 
 	i = 0;
-	while (buff[i] != '\n' && buff[i] != '\0')
+	while (stash[i] != '\n' && stash[i] != '\0')
 		i++;
-	if (buff[i] == 0 || buff[i + 1] == 0)
+	if (stash[i] == 0 || stash[i + 1] == 0)
 		return (NULL);
-	stash = ft_substr(buff, i + 1, ft_strlen(buff) - i);
-	if (!(*stash))
+	new_stash = ft_substr(stash, i + 1, ft_strlen(stash) - i);
+	if (!(*new_stash))
 	{
-		free(stash);
-		stash = NULL;
+		free(new_stash);
+		new_stash = NULL;
 	}
-	buff[i + 1] = 0;
-	return (stash);
+	stash[i + 1] = 0;
+	return (new_stash);
 }
 
 static char	*read_line(int fd, char *stash, char *buff)
@@ -99,6 +99,6 @@ char	*get_next_line(int fd)
 	buff = NULL;
 	if (!line)
 		return (NULL);
-	stash = set_line(line);
+	stash = set_stash(line);
 	return (line);
 }
