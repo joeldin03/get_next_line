@@ -19,7 +19,6 @@
 # include <stdlib.h>
 # include <sys/types.h>
 # include <unistd.h>
-# include "get_next_line.h"
 
 char	*get_next_line(int fd);
 char	*ft_substr(char const *s, unsigned int start, size_t len);
