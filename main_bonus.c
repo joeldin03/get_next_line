@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   main_bonus.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: joelozan <joelozan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/02/15 17:34:19 by joelozan          #+#    #+#             */
-/*   Updated: 2024/02/21 11:06:33 by joelozan         ###   ########.fr       */
+/*   Created: 2024/02/21 11:03:24 by joelozan          #+#    #+#             */
+/*   Updated: 2024/02/21 11:37:48 by joelozan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,19 +16,26 @@
 
 int	main(void)
 {
-	int		fd;
+	int		fd1;
+	int		fd2;
 	char	*line;
 
-	fd = open("text1.txt", O_RDONLY);
+	fd1 = open("text1.txt", O_RDONLY);
+	fd2 = open("text2.txt", O_RDONLY);
 	while (1)
 	{
-		line = get_next_line(fd);
+		line = get_next_line(fd1);
+		if (line == NULL)
+			break ;
+		printf("%s", line);
+		free(line);
+
+		line = get_next_line(fd2);
 		if (line == NULL)
 			break ;
 		printf("%s", line);
 		free(line);
 	}
-	printf("\n%s", line);
-	close(fd);
-	return (0);
+	close(fd1);
+	close(fd2);
 }

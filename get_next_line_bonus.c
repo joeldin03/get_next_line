@@ -6,7 +6,7 @@
 /*   By: joelozan <joelozan@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/15 18:32:17 by joelozan          #+#    #+#             */
-/*   Updated: 2024/02/15 21:53:31 by joelozan         ###   ########.fr       */
+/*   Updated: 2024/02/21 12:35:51 by joelozan         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,12 @@ char	*get_next_line(int fd)
 	char		*line;
 	char		*buff;
 
+	if (fd < 0 || BUFFER_SIZE <= 0 || fd > MAX_FD + 1)
+		return (NULL);
 	buff = malloc((BUFFER_SIZE + 1) * sizeof(char));
-	if (fd < 0 || BUFFER_SIZE <= 0 || read(fd, 0, 0) < 0)
+	if (!buff)
+		return (NULL);
+	if (read(fd, 0, 0) < 0)
 	{
 		free(stash[fd]);
 		free(buff);
@@ -92,8 +96,6 @@ char	*get_next_line(int fd)
 		buff = NULL;
 		return (NULL);
 	}
-	if (!buff)
-		return (NULL);
 	line = read_line(fd, stash[fd], buff);
 	free(buff);
 	buff = NULL;
